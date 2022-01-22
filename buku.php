@@ -7,6 +7,6 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Ini Halaman Buku </h1>
+    <h1 class="text-light">Ini Halaman Buku </h1>
 </body>
 </html>

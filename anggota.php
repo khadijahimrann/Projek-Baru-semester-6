@@ -1,11 +1,11 @@
 
-<center><h1 class="mt-4 mb-3">Data Anggota</h1></center>
+<center><div class="text-light"><h1 class="mt-4 mb-3">Data Anggota</h1></div></center>
 <!-- Button trigger modal -->
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
 Tambah Data
 </button>
 <!-- --------------------------------------------------------------------------------------------------- -->
-<table class="table table-striped table-hover">
+<table class="table table-striped table-secondary">
     <tr class="text-center">
         <th>No</th>
         <th>NIS</th>
@@ -13,14 +13,20 @@ Tambah Data
         <th>Jenis Kelamin</th>
         <th>Tempat Lahir</th>
         <th>Tanggal Lahir</th>
-        <th>Id Kelas</td>
-        <th>Id Jurusan</th>
+        <th>Kelas</td>
+        <th>Jurusan</th>
         <th>No Telepon</th>
         <th>Alamat</th>
         <th>--Action--</th>
     </tr>
     <?php
-        $query = mysqli_query($konek,"SELECT * FROM anggota");
+        // $query = mysqli_query($konek,"SELECT * FROM anggota");
+        $query = mysqli_query($konek,"SELECT anggota.id_anggota, anggota.nis, anggota.nama, anggota.jk, anggota.tempat_lahir, anggota.tanggal_lahir,
+        anggota.id_kelas, anggota.id_jurusan, anggota.no_telepon, anggota.alamat, kelas.id_kelas, kelas.nama_kelas,
+        jurusan.id_jurusan, jurusan.nama_jurusan
+        FROM anggota
+        JOIN kelas ON anggota.id_kelas = kelas.id_kelas
+        JOIN jurusan ON anggota.id_jurusan = jurusan.id_jurusan");
         $no = 1;
         foreach ($query as $row) {
     ?>
@@ -28,18 +34,18 @@ Tambah Data
         <td align="center" valign="middle"><?php echo $no; ?></td>
         <td valign="middle"><?php echo $row['nis']; ?></td>
         <td valign="middle"><?php echo $row['nama']; ?></td>
-        <td valign="middle"><?php echo $row['jk']; ?></td>
+        <td valign="middle"><?php echo $row['jk']=="L"?"Laki-Laki":"Perempuan"; ?></td>
         <td valign="middle"><?php echo $row['tempat_lahir']; ?></td>
         <td valign="middle"><?php echo $row['tanggal_lahir']; ?></td> 
-        <td valign="middle"><?php echo $row['id_kelas']; ?></td>
-        <td valign="middle"><?php echo $row['id_jurusan']; ?></td> 
+        <td valign="middle"><?php echo $row['nama_kelas']; ?></td>
+        <td valign="middle"><?php echo $row['nama_jurusan']; ?></td> 
         <td valign="middle"><?php echo $row['no_telepon']; ?></td>
         <td valign="middle"><?php echo $row['alamat']; ?></td>
         <td valign="middle">
         <a href="?page=anggota-delete&delete&id=<?php echo $row['id_anggota']; ?>">
-            <button class="btn btn-danger" name="delete"><i class="fas fa-trash-alt"> Hapus</i></button>
+            <button class="btn btn-danger" name="delete"><i class="fas fa-trash-alt"> Hapus</i></button></a>
         <a href="?page=anggota-edit&edit&id=<?php echo $row['id_anggota']; ?>">
-            <button class="btn btn-warning" name="insert"><i class="fas fa-edit"></i>Update</button>
+            <button class="btn btn-warning" name="insert"><i class="fas fa-edit"></i>Update</button></a>
         </td>
     </tr>
     <?php

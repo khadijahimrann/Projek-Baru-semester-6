@@ -14,7 +14,7 @@ if(isset($_POST['save']))
 
 
     $query_insert = mysqli_query($konek,"INSERT INTO anggota VALUES('','$nis','$nama','$jk','$tempat_lahir','$tanggal_lahir','$id_kelas','$id_jurusan','$no_telepon','$alamat')");
-
+// mysql query fungsinya untuk menjalankan instruksi ke sql
 
 if($query_insert) {
     ?>
@@ -22,7 +22,7 @@ if($query_insert) {
            Data Berhasil Disimpan !!!
         </div>
     <?php
-    header('refresh:2; url=http://localhost/mywebsite1-main/admin.php?page=anggota#');
+    header('refresh:2; url=http://localhost/mywebsite1-main/dashboard.php?page=anggota#');
 }  else {
     ?>
         <div class="alert alert-danger">
